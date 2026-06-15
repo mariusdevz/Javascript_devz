@@ -68,3 +68,18 @@ console.log(longWords);
 const result = numbers2.filter((num) => num > 2)
     .map((num) => num * 10).filter((num) => num < 55);
 console.log(result);
+
+// REDUCE - combine all elements into single value
+const numbers3 = [1, 2, 3, 4, 5];
+const sum = numbers3.reduce((acc, num) => acc + num, 0);
+console.log(sum);
+
+// SORT
+const nums = [3, 1, 4, 1, 5, 9];
+nums.sort((a, b) => a - b);
+console.log(nums);
+
+nums.sort((a, b) => b - a); // descending
+console.log(nums);
+
+
