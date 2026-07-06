@@ -34,7 +34,9 @@ console.log(highestSingleGrade);
 
 console.log("Lowest Grade:", lowestG);
 
-const G_average = studentGrades.filter((student) => student >= 90 ? `${student.name}: Highest: ${}`)
+const G_average = studentGrades.filter((student) => student >= 90 ? "A student" : student >= 90);
+console.log(G_average);
+
 
 
 
