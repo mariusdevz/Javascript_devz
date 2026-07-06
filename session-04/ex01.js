@@ -1,8 +1,24 @@
-let adjective = "Glutton";
-let noun = "Boy";
-let verb = "Running";
-let place = "Chapelle sixtheen";
-let adjective2 = "Kiss the princess";
-let noun2 = "apples";
-let firstStory = "Once upon a time, there was a(n) " + adjective + " " + noun + " who loved to eat " + noun2 + ". The " + noun + " lived in a " + place + " and had " + adjective2 + " nostrils that blew fire when it was " + verb + ".";
-console.log(firstStory);
+const person = {
+    name: "mariusdevz",
+    age: 25,
+    email: 'mariusdakid@gmail.com',
+    city: "Yaounde",
+    hobbies: ["gaming", "workouts"],
+    address: {
+        street: "street123",
+        city: "Mexico",
+        zip: "zip-code"
+    }
+}
+
+console.log(`${person.name}, ${person.email}`);
+console.log(person.hobbies[0]);
+console.log(person.address.city);
+
+person.phone = "555-1234";
+// console.log(person);
+
+delete person.email;
+console.log(person);
+
+
