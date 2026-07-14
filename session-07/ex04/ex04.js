@@ -1,28 +1,26 @@
 const userForm = document.getElementById("userForm");
-const btn = document.querySelector('button');
+const btn = document.querySelector("button");
 const email = document.getElementById("email");
 const name = document.getElementById("name");
 const outputEl = document.getElementById("output");
 
+const savedData = JSON.parse(localStorage.getItem("userData"));
+if (savedData) {
+    outputEl.textContent = `Saved user: ${savedData.name} ${savedData.email}`;
+    outputEl.style.color = "blue"
+}
 btn.addEventListener("click", (e) => {
     e.preventDefault();
-    const emailValue = email.value;
-    const nameValue = name.value;
-    email.value = "";
-    name.value = "";
+    emailValue = email.value.trim();
+    nameValue = name.value.trim();
 
-    if (!nameValue !== "" && emailValue.includes("@")) {
-        outputEl.textContent = `Welcome ${nameValue}!`;
+    if (nameValue !== "" && emailValue.includes("@")) {
+        outputEl.textContent = `${nameValue} (${emailValue})`;
         outputEl.style.color = "green";
+        const userData = { name: nameValue, email: emailValue }
+        localStorage.setItem("userData", JSON.stringify(savedData))
     } else {
-        outputEl.textContent = "Wrong input!"
-        outputEl.style.color = "red"
+        outputEl.textContent = "Wrong Input!";
+        outputEl.style.color = "red";
     }
-
-    localStorage.setItem("outputEl", JSON.stringify("outputEl"));
-    console.log(outputEl);
-    console.log(localStorage.length)
-    console.log(localStorage.key(0));
-
-
 })
