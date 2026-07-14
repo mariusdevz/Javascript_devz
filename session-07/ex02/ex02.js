@@ -8,9 +8,9 @@ for (let i = 1; i <= 5; i++) {
     paragraph.textContent = `Paragraph ${i}`;
     paragraph.classList.add("para");
     if (i % 2 === 1) {
-        paragraph.style.color = "red"
+        paragraph.style.color = "red";
     } else {
-        paragraph.style.color = "blue"
+        paragraph.style.color = "blue";
     }
     divEl.appendChild(paragraph);
 
