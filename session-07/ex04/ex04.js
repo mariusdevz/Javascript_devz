@@ -18,7 +18,8 @@ btn.addEventListener("click", (e) => {
         outputEl.textContent = `${nameValue} (${emailValue})`;
         outputEl.style.color = "green";
         const userData = { name: nameValue, email: emailValue }
-        localStorage.setItem("userData", JSON.stringify(savedData))
+        localStorage.setItem("userData", JSON.stringify(savedData));
+
     } else {
         outputEl.textContent = "Wrong Input!";
         outputEl.style.color = "red";
