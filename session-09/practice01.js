@@ -62,7 +62,6 @@ async function updatePost(id,
 
     return await response.json();
 }
-
 // DELETE REQUEST
 async function deletePost(id) {
     const response = await fetch(
