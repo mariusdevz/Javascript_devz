@@ -1,64 +1,87 @@
-class fetchPost {
-    constructor(baseURL = "https://jsonplaceholder.typicode.com/posts") {
-        this.baseURL = baseURL;
+async function fetchPOSTS() {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+    if (!response.ok) {
+        throw new Error(`Failed to fetch posts: ${response.status}`);
     }
+    return response.json();
+}
 
-    async getAllPosts(id) {
-        const response = await fetch(`${this.baseURL}/${id}`);
-        const data = await response.json();
-        console.log(data);
-
+async function fetchById(id) {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`);
+    if (!response.ok) {
+        throw new Error(`Failed to fetch post ${id}: ${response.status}`);
     }
+    return response.json();
+}
 
-    async createPost(title, body) {
-        const response = await fetch(`${this.baseURL}`, {
-            method: "POST",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify({
-                title: title,
-                body: body,
-                userId: 1
-            })
+async function createPost(title, body) {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+        method: "POST",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify({
+            title: title,
+            body: body,
+            userId: 1
         })
+    });
 
-        const data = await response.json();
-        console.log(data);
+    if (!response.ok) {
+        throw new Error(`Failed to create post: ${response.status}`);
     }
 
-    async updatePost(id, updates) {
-        const response = await fetch(`${this.baseURL}/${id}`, {
-            method: "PUT",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(updates)
-        });
+    return response.json();
+}
 
-        const data = await response.json();
-        console.log(data);
+async function updatePost(id, updates) {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        method: "PUT",
+        headers: {
+            "content-type": "application/json"
+        },
+        body: JSON.stringify(updates)
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to update post ${id}: ${response.status}`);
     }
 
-    async deletePost(id) {
-        const response = await fetch(`${this.baseURL}/${id}`,
-            {
-                method: "DELETE",
-                headers: {
-                    "content-type": "application/json"
-                }
-            }
-        );
-        const data = await response.json();
-        console.log(data);
+    return response.json();
+}
+
+async function deletePost(id) {
+    const response = await fetch(`https://jsonplaceholder.typicode.com/posts/${id}`, {
+        method: "DELETE",
+        headers: {
+            "content-type": "application/json"
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error(`Failed to delete post ${id}: ${response.status}`);
+    }
+
+    return response.json();
+}
+
+async function displayPOSTS() {
+    try {
+        const posts = await fetchPOSTS();
+        console.log("All posts:", posts);
+
+        console.log("Post by id:", await fetchById(2));
+        console.log("Created post:", await createPost("make dinner", "wash the car"));
+        console.log("Updated post:", await updatePost(2, {
+            title: "fetching",
+            body: "getting info",
+            userId: 2
+        }));
+        console.log("Deleted post:", await deletePost(3));
+    } catch (error) {
+        console.log(error.message);
     }
 }
 
-const posts = new fetchPost();
-// posts.getAllPosts(1)
-// posts.createPost("tom", "air hockey")
-// posts.updatePost(1, {
-//     title: "Updated title",
-//     body: "Updated body",
-// });
-posts.deletePost(2);
+displayPOSTS();
+
